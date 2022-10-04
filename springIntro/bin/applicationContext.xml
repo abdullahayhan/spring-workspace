@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   		http://www.springframework.org/schema/beans/spring-beans.xsd
+	   		http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context.xsd">
+	   		
+			<!-- tekrarlamamak icin verileri bir dosyaya yazıp oradan bu sekilde import ediyoruz. -->
+											<!-- string injection -->
+	   		<context:property-placeholder location="classpath:values.properties"/>
+	   		
+<!-- 	   		   burada da id ve classını belirliyoruz bize newlemesini istiyoruz -->
+	   		<bean id="database" class="springIntro.MsSqlCustomerDal">
+	   				<property name="connectionString" value="${database.connectionString"></property>
+	   		</bean> 
+	   		
+	   		<bean id="service" class="springIntro.CustomerManager">
+	   		
+						<!--consturctor injection -->
+	   			<constructor-arg ref="database"/>
+										
+							<!-- setter injection -->
+				<!-- <property name="customerDal" ref="database"></property> -->
+	   		</bean>
+
+</beans>
